@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
   treeRoot.addEventListener("click", (e) => {
     const li = e.target.closest("li");
     if (!li) return;
-    treeRoot.querySelectorAll("li").forEach((n) => n.classList.remove("selected"));
+    treeRoot.querySelectorAll("li").forEach((n) =>
+      n.classList.remove("selected")
+    );
     li.classList.add("selected");
   });
 
@@ -70,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const li = e.target.closest("li");
     if (!li) return;
-    const action = prompt("Aktion: n=Datei, f=Ordner, r=Umbenennen, d=L\u00f6schen");
+    const action = prompt(
+      "Aktion: n=Datei, f=Ordner, r=Umbenennen, d=L\\u00f6schen"
+    );
     if (action === "n") addChild(li, "file");
     else if (action === "f") addChild(li, "folder");
     else if (action === "r") {
@@ -101,8 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ul.appendChild(draggedItem);
   });
 
-  newFileBtn.addEventListener("click", () => addChild(treeRoot.querySelector("li"), "file"));
-  newFolderBtn.addEventListener("click", () => addChild(treeRoot.querySelector("li"), "folder"));
+  newFileBtn.addEventListener("click", () =>
+    addChild(treeRoot.querySelector("li"), "file")
+  );
+  newFolderBtn.addEventListener("click", () =>
+    addChild(treeRoot.querySelector("li"), "folder")
+  );
 
   function setActiveTab(tab) {
     document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
