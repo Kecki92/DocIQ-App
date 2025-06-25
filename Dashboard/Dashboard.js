@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = e.target.closest("li");
     if (!li) return;
     const action = prompt(
-      "Aktion: n=Datei, f=Ordner, r=Umbenennen, d=L\\u00f6schen"
+      "Aktion: n=Datei, f=Ordner, r=Umbenennen, d=Löschen"
     );
     if (action === "n") addChild(li, "file");
     else if (action === "f") addChild(li, "folder");
