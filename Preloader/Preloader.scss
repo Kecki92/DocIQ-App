@@ -1,0 +1,113 @@
+* {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+:root {
+	--hue: 223;
+	--sat: 10%:
+	--gray100: hsl(var(--hue), var(--sat), 90%);
+	--gray900: hsl(var(--hue), var(--sat), 10%);
+	--bg: light-dark(var(--gray100), var(--gray900));
+	--fg: light-dark(var(--gray900), var(--gray100));
+	--dur: 8s;
+	color-scheme: light dark;
+	font-size: clamp(1.25rem, 1.0417rem + 1.0417vw, 1.875rem);
+}
+body {
+	background: var(--bg);
+	color: var(--fg);
+	font: bold 1em/1.5 "Comfortaa", sans-serif;
+	display: grid;
+	place-items: center;
+	height: 100vh;
+	letter-spacing: 0.1em;
+	text-align: center;
+	text-transform: uppercase;
+}
+main {
+	padding: 1.5em 0;
+}
+.hexagon {
+	margin-bottom: 1.5em;
+	overflow: hidden;
+	position: relative;
+	width: 15em;
+	height: 15em;
+
+	&__group {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+
+		&:nth-child(odd) {
+			transform: rotate(30deg);
+		}
+	}
+	&__sector {
+		animation-name: moveOut1;
+		top: calc(50% - 0.1em);
+		left: calc(50% - 0.1em);
+
+		&,
+		&:before,
+		&:after {
+			animation: {
+				duration: var(--dur);
+				iteration-count: infinite;
+				timing-function: linear;
+				// play-state: paused;
+			};
+			position: absolute;
+			width: 0.2em;
+			height: 0.2em;
+		}
+		&:before,
+		&:after {
+			animation-name: ripple;
+			background-color: currentColor;
+			border-radius: 0.1em;
+			content: "";
+			display: block;
+			top: 0;
+			left: 0;
+			transform-origin: 0.1em 0.1em;
+		}
+		&:before {
+			transform: rotate(-30deg);
+		}
+		&:after {
+			transform: rotate(-150deg);
+		}
+		@for $s from 2 through 6 {
+			&:nth-child(#{$s}) {
+				animation-name: moveOut#{$s};
+			}
+		}
+	}
+
+	@for $g from 2 through 6 {
+		&__group:nth-child(#{$g}) &__sector,
+		&__group:nth-child(#{$g}) &__sector:before,
+		&__group:nth-child(#{$g}) &__sector:after {
+			animation-delay: calc(var(--dur) * #{-$g + 1} / 6);
+		}
+	}
+}
+
+/* Animations */
+@for $m from 1 through 6 {
+	$angle: 60deg * ($m - 1);
+
+	@keyframes moveOut#{$m} {
+		from { transform: rotate($angle) translateY(0) scale(0); }
+		3% { transform: rotate($angle) translateY(0.2em) scale(1); }
+		97% { transform: rotate($angle) translateY(7.3em) scale(1); }
+		to { transform: rotate($angle) translateY(7.5em) scale(0); }
+	}
+}
+@keyframes ripple {
+	from, to { width: 0.2em; }
+	33% { width: 2.4em; }
+}

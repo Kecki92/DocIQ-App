@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+/* Hover-Zone oben */
+.menu-trigger-area {
+  height: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+/* Menüleiste */
+.menu-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 8px 16px;
+  position: fixed;
+  top: -100px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+/* Sichtbarkeit der Leiste */
+.menu-bar.visible {
+  top: 0;
+}
+
+/* Bereich links (Logo + Menü) */
+.menu-left {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.logo {
+  height: 32px;
+  margin-right: 16px;
+}
+
+/* Menü */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu-item {
+  position: relative;
+  font-size: 12px;
+}
+
+.menu > .menu-item > a {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  position: relative;
+  background-color: transparent;
+  z-index: 1002; /* Sicherstellen, dass es oben bleibt */
+}
+
+/* Dropdown-Menü */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Direkt unter dem Menüpunkt */
+  left: 0;
+  background: white;
+  min-width: 220px;
+  max-width: 220px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 6px 0;
+  border-radius: 6px;
+  z-index: 1001;
+}
+
+.dropdown li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li a {
+  display: block;
+  padding: 8px 20px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #222;
+}
+
+.dropdown li a:hover {
+  background-color: #f2f2f2;
+}
+
+/* Trenner im Dropdown */
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 6px 0;
+}
+
+/* Dropdown dauerhaft anzeigen, wenn über .menu-item oder .dropdown */
+.menu-item:hover .dropdown,
+.menu-item:has(.dropdown:hover) .dropdown {
+  display: block;
+}
+
+/* Menüleiste sichtbar halten bei Hover */
+.menu-bar:hover,
+.menu-bar:has(.dropdown:hover),
+.menu-bar:has(.dropdown:focus-within),
+.menu-item:hover > .dropdown {
+  top: 0;
+}
+
+/* Suchfeld zentriert in der Menüleiste */
+.search-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1002;
+}
+
+.search-input {
+  width: 250px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
