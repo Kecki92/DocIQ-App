@@ -119,9 +119,13 @@ body {
 /* Menüleiste sichtbar halten bei Hover */
 .menu-bar:hover,
 .menu-bar:has(.dropdown:hover),
-.menu-bar:has(.dropdown:focus-within),
-.menu-item:hover > .dropdown {
+.menu-bar:has(.dropdown:focus-within) {
   top: 0;
+}
+
+/* Position dropdowns below the menu items */
+.menu-item:hover > .dropdown {
+  top: 100%;
 }
 
 /* Suchfeld zentriert in der Menüleiste */
